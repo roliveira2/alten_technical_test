@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "vFzznqrZ1xTN+mk1P/qUKhvL8MsQgRFkQ3BWJ0cfTGLChgZErQE2xUCco1W4fKCLTNyfZAunLB58a3UMVyN1dA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rodri\\Documents\\GitHub_Roliveira2\\Alten\\alten_technical_test\\AltenTest\\AltenTest.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rodri\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+  ],
+  "logs": []
+}
