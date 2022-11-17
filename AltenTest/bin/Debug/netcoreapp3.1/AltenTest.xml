@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AltenTest</name>
+    </assembly>
+    <members>
+        <member name="M:AltenTest.Controllers.BookingController.Search(AltenTest.Entities.BookingRequestBody.SearchReservation)">
+            <summary>
+            Returns a list or a single booking
+            </summary>
+            <response code="200">A booking was found</response>
+            <response code="204">No bookings were found with the search parameters entered</response>
+            <response code="400">The data sent is incorrect.</response>
+            <response code="401">If the operation is not authorized.</response>
+            <response code="500">An error occurred while looking for the booking.</response>
+        </member>
+        <member name="M:AltenTest.Controllers.BookingController.Post(AltenTest.Entities.BookingRequestBody.RequestReservation,System.Nullable{System.Int32})">
+            <summary>
+            Create a new booking
+            </summary>
+            <response code="200">The booking was created successfully</response>
+            <response code="400">The data sent is incorrect.</response>
+            <response code="401">If the operation is not authorized.</response>
+            <response code="500">An error occurred while looking for the booking.</response>
+        </member>
+        <member name="M:AltenTest.Controllers.BookingController.Post(AltenTest.Entities.BookingRequestBody.UpdateReservation,System.Nullable{System.Int32})">
+            <summary>
+            Update a booking
+            </summary>
+            <response code="200">The booking was updated successfully</response>
+            <response code="400">The data sent is incorrect.</response>
+            <response code="401">If the operation is not authorized.</response>
+            <response code="500">An error occurred while looking for the booking.</response>
+        </member>
+    </members>
+</doc>

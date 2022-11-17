@@ -1,16 +1,20 @@
+using AltenTest.Infrastructure;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Xml.XPath;
 
 namespace AltenTest
 {
@@ -27,6 +31,30 @@ namespace AltenTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDependencyInjection();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Booking - Cancun Hotel",
+                    Version = "v1"
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+                c.EnableAnnotations();
+
+                if (File.Exists(xmlFile))
+                {
+                    var comments = new XPathDocument(xmlFile);
+                    c.OperationFilter<XmlCommentsOperationFilter>(comments);
+                    //c.model<XmlCommentsModelFilter>(comments);
+                }
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +66,16 @@ namespace AltenTest
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = string.Empty; //swagger
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking - Cancun Hotel");
+                c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+            });
+
 
             app.UseRouting();
 
